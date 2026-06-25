@@ -1,0 +1,26 @@
+name: two_brain_cell
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+      - name: Build
+        run: |
+          mkdir -p build
+          cd build
+          cmake ..
+          make -j 8
+
+      - name: Run example
+        run: |
+          cd build/tests && ./tests
