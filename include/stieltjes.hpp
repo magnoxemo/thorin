@@ -57,11 +57,13 @@ namespace orthopoly {
          */
         std::vector<std::vector<double>> gram_matrix(const PolynomialBasis& basis) const;
 
-        BuilderOptions                  opts_;
+        /// getter function for BuilderOptions
+        BuilderOptions& options(){return opts_;}
+
     private:
         double ip(const ScalarFn& f, const ScalarFn& g,
                   const ScalarFn& wfn, double a, double b) const;
-
+        BuilderOptions                  opts_;
         const WeightFunction&           w_;
         std::unique_ptr<QuadratureRule> quad_;
     };

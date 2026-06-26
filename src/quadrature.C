@@ -40,17 +40,21 @@ namespace orthopoly {
             double xi = std::cos(M_PI * (i + 0.75) / (n_ + 0.5));
             double p1, p2, p3, dp;
             // Newton refinement on P_n
-            for (int iter = 0; iter < 200; ++iter) {
+            for (int iter = 0; iter < 1000; ++iter)
+            {
                 p1 = 1.0; p2 = 0.0;
-                for (int j = 1; j <= n_; ++j) {
+
+                for (int j = 1; j <= n_; ++j)
+                {
                     p3 = p2; p2 = p1;
                     p1 = ((2*j - 1) * xi * p2 - (j - 1) * p3) / j;
                 }
+
                 // Derivative via: (1-x²) P_n'(x) = n (P_{n-1}(x) - x P_n(x))
                 dp = n_ * (xi * p1 - p2) / (xi * xi - 1.0);
                 double dxi = p1 / dp;
                 xi -= dxi;
-                if (std::abs(dxi) < 1e-15) break;
+                if (std::abs(dxi) < 1e-20) break;
             }
             // Symmetric placement
             xi_[i]          = -xi;
