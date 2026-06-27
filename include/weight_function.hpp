@@ -49,56 +49,6 @@ namespace orthopoly {
         std::string name_;
     };
 
-// ── Concrete families ─────────────────────────────────────────────────────────
-
-    class LegendreWeight : public WeightFunction {
-    public:
-        LegendreWeight();
-        double operator()(double x) const override;
-    };
-
-    class ChebyshevTWeight : public WeightFunction {
-    public:
-        ChebyshevTWeight();
-        double operator()(double x) const override;
-    };
-
-    class ChebyshevUWeight : public WeightFunction {
-    public:
-        ChebyshevUWeight();
-        double operator()(double x) const override;
-    };
-
-    class HermiteWeight : public WeightFunction {
-    public:
-        /// @param half_range  domain is [-half_range, +half_range]
-        explicit HermiteWeight(double half_range = 6.0);
-        double operator()(double x) const override;
-    };
-
-    class LaguerreWeight : public WeightFunction {
-    public:
-        /// @param alpha   generalized parameter (must be > -1)
-        /// @param cutoff  upper integration limit
-        explicit LaguerreWeight(double alpha = 0.0, double cutoff = 30.0);
-        double operator()(double x) const override;
-        double alpha() const { return alpha_; }
-
-    private:
-        double alpha_;
-    };
-
-    class JacobiWeight : public WeightFunction {
-    public:
-        /// @param alpha, beta  must be > -1
-        JacobiWeight(double alpha, double beta);
-        double operator()(double x) const override;
-        double alpha() const { return alpha_; }
-        double beta()  const { return beta_;  }
-
-    private:
-        double alpha_, beta_;
-    };
 
     class LambdaWeight : public WeightFunction {
     public:
@@ -110,14 +60,5 @@ namespace orthopoly {
     private:
         std::function<double(double)> fn_;
     };
-
-// ── Factory helpers ───────────────────────────────────────────────────────────
-
-    std::unique_ptr<WeightFunction> make_legendre();
-    std::unique_ptr<WeightFunction> make_chebyshev_T();
-    std::unique_ptr<WeightFunction> make_chebyshev_U();
-    std::unique_ptr<WeightFunction> make_hermite(double half_range = 6.0);
-    std::unique_ptr<WeightFunction> make_laguerre(double alpha = 0.0, double cutoff = 30.0);
-    std::unique_ptr<WeightFunction> make_jacobi(double alpha, double beta);
 
 } // namespace orthopoly
