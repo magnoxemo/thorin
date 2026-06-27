@@ -9,15 +9,6 @@
  *   - evaluation w(x)
  *   - the integration domain [a, b]
  *   - a human-readable name
- *
- * Concrete classes
- * ----------------
- *   LegendreWeight     w(x) = 1                       on [-1, 1]
- *   ChebyshevTWeight   w(x) = 1/√(1-x²)              on (-1, 1)
- *   ChebyshevUWeight   w(x) = √(1-x²)                on (-1, 1)
- *   HermiteWeight      w(x) = exp(-x²)                on [-R, R]
- *   LaguerreWeight     w(x) = x^alpha * exp(-x)       on [0, cutoff]
- *   JacobiWeight       w(x) = (1-x)^alpha*(1+x)^beta  on [-1, 1]
  *   LambdaWeight       arbitrary std::function         on any [a, b]
  */
 
